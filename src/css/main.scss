@@ -1,0 +1,30 @@
+@import "mq";
+@import "fonts";
+
+// Uncomment for embeds
+//@import "embed";
+
+// Uncomment for full screen (including immersive article main media)
+//@import "fullscreen";
+
+.element-atom,
+.interactive-atom {
+    margin: 0 !important;
+}
+
+iframe.fenced {
+    display: none;
+}
+
+.gv-table {
+    display: table;
+    border-spacing: 10px;
+}
+
+.gv-row,.gv-headers {
+    display: table-row;
+}
+
+.gv-datum,.gv-header {
+    display: table-cell;
+}
