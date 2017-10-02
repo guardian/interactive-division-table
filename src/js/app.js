@@ -3,12 +3,19 @@ import xmlparse from 'pixl-xml'
 import mustache from 'mustache'
 import tableTemplate from '!raw-loader!./../templates/table.html'
 
-var divisiondiv = document.querySelector(".gv-division");
+var table = document.querySelector(".gv-table")
+var divisiondiv = document.querySelector(".gv-data-rows");
 var searchEl = document.getElementById("search-field");
+var headers = document.querySelectorAll(".gv-header")
+var headerrow = document.querySelector(".gv-headers")
 
-var members = [];
+
+function sortcolumns(){console.log('sorting')}
+
+var members = [], currentSort, lastSorted;
 
 function initsearch() {
+    
     //  searchEl.addEventListener("keyup", function() {console.log('sausage')});
     searchEl.addEventListener("keyup", function () { render() });
     searchEl.addEventListener("focus", function () {
@@ -21,6 +28,8 @@ function initsearch() {
             this.value = "Search";
         }
     });
+    headerrow.addEventListener("click", function() {console.log('34343')});
+    
 }
 
 function isDev() {
@@ -49,9 +58,17 @@ function searchmatch(member) {
 function render() {
     console.log(searchEl.value);
     var memberstoshow = (searchEl.value !== "Search" && searchEl.value !== "") ? members.filter(searchmatch) : members;
-    //  var memberstoshow = members.filter(searchmatch);
     var tablehtml = mustache.render(tableTemplate, memberstoshow);
     divisiondiv.innerHTML = tablehtml;
+    /* FAILED ATTEMPT TO REMOVE NEEDLESS EXTRA DIV AND APPEND ROWS DIRECTLY TO THE TABLE
+    var tablerows = document.querySelectorAll(".gv-row");
+    [].slice.apply(tablerows).forEach(function(r){
+        table.appendChild(r);
+    }
+      )
+*/
+  
+  
 }
 
 
@@ -75,6 +92,6 @@ axios(divisionurl, { responseType: 'text' }).then(function (response) {
 });
 
 
-
-
 initsearch();
+
+
