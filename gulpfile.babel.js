@@ -1,4 +1,7 @@
-import config from './config.json'
+
+import getconfig from './config.js'
+
+const config = getconfig;
 
 import gulp from 'gulp'
 import file from 'gulp-file'
@@ -147,7 +150,7 @@ gulp.task('build:html', cb => {
     try {
         let render = requireUncached('./src/render.js').render;
 
-        Promise.resolve(render()).then(html => {
+        Promise.resolve(render(config)).then(html => {
             file('main.html', html, {
                     'src': true
                 })
