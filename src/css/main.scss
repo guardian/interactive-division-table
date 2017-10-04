@@ -7,6 +7,17 @@
 // Uncomment for full screen (including immersive article main media)
 //@import "fullscreen";
 
+$con:    #005789;
+$grn:    #33A22B;
+$lab:    #E31F26;
+$ldem:   #FFB900;
+$others: #B3B3B4;
+$snp:    #FCDD03;
+$ukip:   #7D0069;
+$dup:    $others;
+$sdlp:    $others;
+$pc:     #4a7801;
+
 .element-atom,
 .interactive-atom {
     margin: 0 !important;
@@ -14,6 +25,40 @@
 
 iframe.fenced {
     display: none;
+}
+
+.gv-party{
+        border-radius: 5px;
+        padding: 2px;
+        &.gv-Lab{
+            background-color: $lab;
+            color: white;
+        }
+        &.gv-SNP{
+            background-color: $snp;
+            color:#333;
+        }
+        &.gv-Con{
+            background-color: $con;
+            color: white;
+        }
+        &.gv-Lib{
+            background-color: $ldem;
+            color: #333;
+        }
+        &.gv-Green{
+            background-color: $grn;
+            color: white;
+        }
+        &.gv-DUP{
+            background-color: $ukip;
+            color: white;
+        }
+        &.gv-Plaid{
+            background-color: $pc;
+            color: white;
+        }
+
 }
 
 .gv-table {

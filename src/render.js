@@ -36,6 +36,9 @@ async function getMembers (divisionurl) {
                 case "Labour (Co-op)":
                 m.shortparty = 'Lab';
                 break;
+                case "Green Party":
+                m.shortparty = 'Green';
+                break;
                 case "Labour":
                 m.shortparty = 'Lab';
                 break;
@@ -62,7 +65,6 @@ async function getMembers (divisionurl) {
             }
         })
         fs.writeFileSync("./src/assets/votes.json",JSON.stringify(members));
-        console.log(members[0]);
         return (members);
     }), function(error) {console.log('fetch votes ' + error)};
 }
@@ -72,7 +74,6 @@ async function getMembers (divisionurl) {
 export async function render(config) {
     const divisionurl = config.divisionurl;
     await getMembers(divisionurl);
-    console.log(members);
     var html = mustache.render(mainTemplate,members,partialTemplates);
     return html;
 }
