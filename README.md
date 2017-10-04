@@ -1,3 +1,19 @@
+# Division renderer
+
+Use this spreadsheet:
+
+https://docs.google.com/spreadsheets/d/1erErylnClQlXipwvbPjFe6oPo9tXVZsNrIw08-VrD8M/edit#gid=0
+
+"Recent divisions" has a list of recent divisions including some metadata like the ayes and noes. Once you've found the one you're interested in, grab the id and copy it over to a new row on Sheet1. You can copy down every other column and they will populate themselves. 
+
+Now deploy.
+
+Now take the deployurl from the spreadsheet and embed it in an article. There is purposely no furniture in the table to allow you to write that in the article: Eg "MPs voted tonight on whether to commendably allow the splitting of infinitives. The motion won by 301 votes to 109; find out how your MP voted."
+
+
+
+
+
 # Interactive atom template
 
 ```
