@@ -6,10 +6,22 @@ import mustache from 'mustache'
 import syncrequest from 'sync-request'
 import http from 'http'
 import fs from 'fs'
+//import cleannumber from 'sean-utils'
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-var members;
+
+function cleannumber(input) {
+    if (typeof input == "string") {
+        input = input.replace(/,/g, "");
+        return parseFloat(input);
+    }
+    if (typeof input == "number") {
+        return input;
+    }
+}
+
+var members, summary;
 
 var partialTemplates = {
     "table" : tableTemplate
@@ -19,6 +31,12 @@ async function getMembers (divisionurl) {
 
     await axios(divisionurl, { responseType: 'text'}).then(function (response) {
         var data = xmlparse.parse(response.data);
+        fs.writeFileSync("./src/assets/data.json",JSON.stringify(data));
+        summary = {
+            "for" : cleannumber(data.Division.AyeCount),
+            "against" : cleannumber(data.Division.NoeCount)
+        }  
+        console.log(summary)
         var ayes = data.Division.AyeMembers.Member;
         var noes = data.Division.NoeMembers.Member;
         ayes.map(function (m) {
