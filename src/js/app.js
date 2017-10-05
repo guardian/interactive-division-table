@@ -82,6 +82,7 @@ function render() {
     var memberstoshow = (searchEl.value !== "Search" && searchEl.value !== "") ? members.filter(searchmatch) : members;
     var tablehtml = mustache.render(tableTemplate, memberstoshow);
     tablebody.innerHTML = tablehtml;
+    window.resize();
 }
 
 function initsort() {
@@ -96,7 +97,8 @@ function initexpand() {
     });
 }
 
-//render();
 initsearch();
 initsort();
 initexpand();
+
+console.log('Marsala')

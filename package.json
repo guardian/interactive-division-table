@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "iframe-messenger": "github:guardian/iframe-messenger",
     "mustache": "^2.3.0",
     "pixl-xml": "^1.0.13",
     "promise-polyfill": "^6.0.2",
