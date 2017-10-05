@@ -27,9 +27,25 @@ iframe.fenced {
     display: none;
 }
 
+.gv-vote-For {
+    color: black;
+}
+
+.gv-vote-Against {
+    color: #444;
+}
+
+.gv-row:nth-of-type(1n+6) { 
+    .gv-truncated & {
+        display: none;
+    }
+}
+
+
+
 .gv-party{
         border-radius: 5px;
-        padding: 2px;
+        padding: 4px 4px 2px 2px;
         &.gv-Lab{
             background-color: $lab;
             color: white;
@@ -103,5 +119,42 @@ iframe.fenced {
     	outline: 0;
     	border: 1px solid #767676;
     	color: #333;
+    }
+}
+
+
+.int-button {
+	-webkit-font-smoothing: antialiased;
+	background-color: #005689;
+    border: 0;
+    border-radius: 100px;
+    color: white;
+    display: inline-block;
+    font-family: 'Guardian Text Sans Web', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 30px;
+    line-height: 30.7999992371px;
+    padding-bottom: 0px;
+    padding-right: 10px;
+    padding-top: 0px;
+    position: relative;
+    padding-left: 38px;
+    margin-top: 24px;
+
+    &:hover {
+    	cursor: pointer;
+    }
+
+    svg {
+    	width: 1.5rem;
+	    height: 1.5rem;
+	    vertical-align: middle;
+	    margin: auto;
+	    position: absolute;
+	    top: 0;
+	    bottom: 0;
+	    left: 0.4375rem;
+	    fill: #fff;
     }
 }

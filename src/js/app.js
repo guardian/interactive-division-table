@@ -10,9 +10,9 @@ var tablebody = document.querySelector(".gv-table-body");
 var table = document.querySelector(".gv-table");
 var divisiondiv = document.querySelector(".gv-division");
 var searchEl = document.getElementById("search-field");
-var headers = document.querySelectorAll(".gv-header")
-var headerrow = document.querySelector(".gv-headers")
-
+var headers = document.querySelectorAll(".gv-header");
+var headerrow = document.querySelector(".gv-headers");
+var expandbutton = document.querySelector(".int-button");
 
 function sortcolumns() { console.log('sorting') }
 
@@ -88,6 +88,15 @@ function initsort() {
 headerrow.addEventListener("click", sortColumns);
 }
 
+function initexpand() {
+    expandbutton.addEventListener("click", function() {
+        tablebody.classList.remove("gv-truncated");
+        expandbutton.style.display = "none"
+        render();
+    });
+}
+
 //render();
 initsearch();
 initsort();
+initexpand();
