@@ -24,6 +24,7 @@ $pc:     #4a7801;
 }
 
 .gv-chart {
+    max-width: 720;
     width: 100%;
 }
 
@@ -118,10 +119,15 @@ iframe.fenced {
             background-color: $ukip;
             color: white;
         }
+        &.gv-Others{
+            background-color: $others;
+            color:white;
+        }
         &.gv-Plaid{
             background-color: $pc;
             color: white;
         }
+
 
 }
 
@@ -156,6 +162,16 @@ iframe.fenced {
 
 .gv-datum,.gv-header {
     display: table-cell;
+}
+
+.gv-breakdown {
+    display: inline-block;
+    @include fs-textSans(2);
+    width: 33%;
+}
+.gv-against .gv-party-wrapper {
+    float: right;
+    padding:  2px;
 }
 
 #gv-search-field {

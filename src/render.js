@@ -77,24 +77,39 @@ async function getMembers (divisionurl) {
             }
             m.Party == "Liberal Democrat" ? m.partyclass = "ld" : m.partyclass = m.shortparty;
         })
-        summary.ayesbreakdown = {
-            "Lab": ayes.filter(function(m){ return m.shortparty == "Lab" }).length,
-            "Con": ayes.filter(function(m){ return m.shortparty == "Con" }).length,
-            "LD": ayes.filter(function(m){ return m.shortparty == "Lib Dem" }).length,
-            "SNP": ayes.filter(function(m){ return m.shortparty == "SNP" }).length,
-            "Plaid": ayes.filter(function(m){ return m.shortparty == "Plaid" }).length,
-            "DUP": ayes.filter(function(m){ return m.shortparty == "DUP" }).length,                   
-            "Other": ayes.filter(function(m) {return ["Lab","Con","Lib Dem","SNP","Plaid","DUP"].includes(m.shortparty) == false}).length                
-            
+        var parties = ["Lab","Con","Lib Dem","SNP","Plaid","DUP"];
+        summary.ayesbreakdown = [];
+        summary.noesbreakdown = [];
+        parties.forEach(function(p) {
+            if (ayes.filter(function(m){ return m.shortparty == p }).length > 0 ) {
+                var ayesentry  = {
+                    "party" : p,
+                    "votes" : ayes.filter(function(m){ return m.shortparty == p }).length 
+                };
+                summary.ayesbreakdown.push(ayesentry);
+                
+            }
+            if (noes.filter(function(m){ return m.shortparty == p }).length > 0 ){
+                var noesentry = {
+                    "party" : p,
+                    "votes" : noes.filter(function(m){ return m.shortparty == p }).length             
+                }
+                summary.noesbreakdown.push(noesentry);    
+            }     
+        });
+        if (ayes.filter(function(m) {return parties.includes(m.shortparty) == false}).length > 0) {
+            summary.ayesbreakdown.push({
+                party: "Others",
+                votes : ayes.filter(function(m) {return parties.includes(m.shortparty) == false}).length
+            });        
+    
         }
-        summary.noesbreakdown = {
-            "Lab": noes.filter(function(m){ return m.shortparty == "Lab" }).length,
-            "Con": noes.filter(function(m){ return m.shortparty == "Con" }).length,
-            "LD": noes.filter(function(m){ return m.shortparty == "Lib Dem" }).length,
-            "SNP": noes.filter(function(m){ return m.shortparty == "SNP" }).length,
-            "Plaid": noes.filter(function(m){ return m.shortparty == "Plaid" }).length,
-            "DUP": noes.filter(function(m){ return m.shortparty == "DUP" }).length,                
-            "Other": noes.filter(function(m) {return ["Lab","Con","Lib Dem","SNP","Plaid","DUP"].includes(m.shortparty) == false}).length                
+        if (noes.filter(function(m) {return parties.includes(m.shortparty) == false}).length > 0 ) {
+            summary.noesbreakdown.push({
+                party: "Others",
+                votes : noes.filter(function(m) {return parties.includes(m.shortparty) == false}).length
+            });        
+    
         }
         summary.ayespercent = getPercents(summary.ayesbreakdown);
         summary.noespercent = getPercents(summary.noesbreakdown);
