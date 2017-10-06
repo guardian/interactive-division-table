@@ -1,17 +1,30 @@
-<input class="search" id="search-field" value="Search" />
 <div class="gv-division">
-
-    <div class="gv-table">
-        <div class="gv-headers">
-            <div class="gv-header">MP</div>
-            <div class="gv-header">Party</div>
-            <div class="gv-header">Constituency</div>
-            <div class="gv-header">Vote</div>
+    <div class="gv-summary">
+        <div class="gv-vote-tally-headings">
+            <div class="gv-vote-tally gv-for">For</div>
+            <div class="gv-vote-tally gv-against">Against</div>
         </div>
 
-<div class="gv-table-body gv-truncated">{{ > table }}</div> 
+        <div class="gv-vote-tally-counts">
+
+        <div class="gv-vote-tally gv-for">{{summary.for}}</div>
+    <div class="gv-vote-tally gv-against">{{summary.against}}</div>
+</div>
+
+{{ > chart }}
+<input class="gv-search" id="gv-search-field" value="Search" />
+
+<div class="gv-table">
+    <div class="gv-headers">
+        <div class="gv-header">MP</div>
+        <div class="gv-header">Party</div>
+        <div class="gv-header">Constituency</div>
+        <div class="gv-header">Vote</div>
     </div>
-    <button id="untruncate" class="int-button"><svg width="24" height="24" viewBox="-0.5 0.5 24 24"><path d="M10.682 3.5h1.636l.41 7.773 7.772.408v1.638l-7.77.41-.413 7.772H10.68l-.407-7.77-7.773-.412V11.68l7.773-.407.41-7.773z"></path></svg>Show all</button>
-    
+
+    <div class="gv-table-body gv-truncated">{{ > table }}</div>
+</div>
+<button id="untruncate" class="int-button"><svg width="24" height="24" viewBox="-0.5 0.5 24 24"><path d="M10.682 3.5h1.636l.41 7.773 7.772.408v1.638l-7.77.41-.413 7.772H10.68l-.407-7.77-7.773-.412V11.68l7.773-.407.41-7.773z"></path></svg>Show all</button>
+
 
 </div>

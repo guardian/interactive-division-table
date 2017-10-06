@@ -14,7 +14,7 @@ $ldem:   #FFB900;
 $others: #B3B3B4;
 $snp:    #FCDD03;
 $ukip:   #7D0069;
-$dup:    $others;
+$dup:    $ukip;
 $sdlp:    $others;
 $pc:     #4a7801;
 
@@ -23,8 +23,52 @@ $pc:     #4a7801;
     margin: 0 !important;
 }
 
-.iframe {
-    background-color: red;
+.gv-chart {
+    width: 100%;
+}
+
+.gv-elex-bar {
+    float: left;
+    display: inline-block;
+    height: 30px;
+&.gv-party-Lab {
+    background-color: $lab;
+}
+&.gv-party-Con {
+    background-color: $con;
+}
+&.gv-party-LD {
+    background-color: $ldem;
+}
+&.gv-party-Other {
+    background-color: $others;
+}
+&.gv-party-DUP {
+    background-color: $dup;
+}
+&.gv-party-SNP {
+    background-color: $snp;
+}
+&.gv-party-Plaid {
+    background-color: $others;
+}
+}
+
+
+.gv-vote-tally-headings {
+    @include fs-textSans(4);
+}
+
+.gv-vote-tally-counts {
+    @include fs-bodyHeading(4)    
+}
+
+.gv-vote-tally,.gv-vote-tally-heading {
+    display: inline;
+}
+
+.gv-against {
+    float:right;
 }
 
 iframe.fenced {
@@ -81,7 +125,12 @@ iframe.fenced {
 
 }
 
+.gv-search {
+
+}
+
 .gv-table {
+    margin-left: -10px;
     display: table;
     border-spacing: 10px;
     @include fs-data(2); 
@@ -101,13 +150,16 @@ iframe.fenced {
 
 .gv-row,.gv-headers {
     display: table-row;
+    margin-left: -10px;
+    margin-right: -10px;
 }
 
 .gv-datum,.gv-header {
     display: table-cell;
 }
 
-#search-field {
+#gv-search-field {
+    margin-top: 20px;
 	height: 36px;
 	border: 1px solid #dfdfdf;
 	border-radius: 24px;
