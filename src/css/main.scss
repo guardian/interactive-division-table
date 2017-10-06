@@ -171,7 +171,15 @@ iframe.fenced {
 }
 .gv-against .gv-party-wrapper {
     float: right;
-    padding:  2px;
+    clear: right;
+}
+
+.gv-party-wrapper {
+    padding: 2px;
+}
+
+.gv-summary {
+    padding-bottom: 15px;
 }
 
 #gv-search-field {
