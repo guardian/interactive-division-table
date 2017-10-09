@@ -1,0 +1,15 @@
+<div class="gv-chart">
+    <div class="gv-breakdown gv-for">
+            {{#summary.ayesbreakdown}}
+            <div class="gv-party-wrapper"><span class="gv-party gv-{{party}}">{{party}}</span> <span>{{votes}}</span></div>
+            {{/summary.ayesbreakdown}}
+         
+    </div>
+
+    <div class="gv-breakdown gv-against">
+            {{#summary.noesbreakdown}}
+            <div class="gv-party-wrapper"><span>{{votes}}  </span><span class="gv-party gv-{{party}}">{{party}}</span> </div>
+         {{/summary.noesbreakdown}}         
+    </div>
+   
+ </div>
