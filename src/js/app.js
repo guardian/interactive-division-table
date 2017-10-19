@@ -1,5 +1,5 @@
 import axios from 'axios'
-import xmlparse from 'pixl-xml'
+import xmlparse from './lib/pixl-xml'
 import mustache from 'mustache'
 import tableTemplate from '!raw-loader!./../templates/table.html'
 import votes from './../assets/votes.json'
