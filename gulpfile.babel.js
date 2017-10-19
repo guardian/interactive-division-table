@@ -207,6 +207,39 @@ gulp.task('deploy', ['build'], cb => {
     });
 });
 
+gulp.task('deploylive', ['build'], cb => {
+    if(s3Path === "atoms/2016/05/blah") {
+        console.error("ERROR: You need to change the deploy path from its default value")
+        return;
+    }
+
+    gulp.src(`${buildDir}/**/*`)
+        .pipe(s3Upload('max-age=31536000', s3VersionPath))
+        .on('end', () => {
+            gulp.src('config.json')
+                .pipe(file('preview', version))
+                .pipe(file('live', version))
+                .pipe(s3Upload('max-age=30', s3Path))
+                .on('end', cb);
+        });
+});
+
+gulp.task('deploypreview', ['build'], cb => {
+    if(s3Path === "atoms/2016/05/blah") {
+        console.error("ERROR: You need to change the deploy path from its default value")
+        return;
+    }
+    
+    gulp.src(`${buildDir}/**/*`)
+        .pipe(s3Upload('max-age=31536000', s3VersionPath))
+        .on('end', () => {
+            gulp.src('config.json')
+                .pipe(file('preview', version))
+                .pipe(s3Upload('max-age=30', s3Path))
+                .on('end', cb);
+        });
+});
+
 gulp.task('local', ['build'], () => {
     return gulp.src('harness/*')
         .pipe(template({
