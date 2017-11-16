@@ -69,7 +69,7 @@ function ordermembers(criterion) {
 }
 //PUT CONSTITUENCY MATCH BACK IN
 function searchmatch(member) {
-    if (member.tidyname.indexOf(searchEl.value) > -1 || member.tidyname.indexOf(searchEl.value) > -1 || member.shortparty.indexOf(searchEl.value) > -1)
+    if (member.tidyname.indexOf(searchEl.value) > -1 || member.constituency.indexOf(searchEl.value) > -1 || member.shortparty.indexOf(searchEl.value) > -1)
     { return true }
     else
     { return false }

@@ -41,8 +41,8 @@ async function getMembers (divisionurl) {
         var data = response.data.result;
         fs.writeFileSync("./src/assets/data.json",JSON.stringify(data));
         summary = {
-            "for" : cleannumber(data.primaryTopic.AyesCount[0]._value) + 2,
-            "against" : cleannumber(data.primaryTopic.Noesvotecount[0]._value) + 2
+            "for" : cleannumber(data.primaryTopic.AyesCount[0]._value),
+            "against" : cleannumber(data.primaryTopic.Noesvotecount[0]._value)
         }  
         var ayes = data.primaryTopic.vote.filter(function(m){
             return m.type == "http://data.parliament.uk/schema/parl#AyeVote"
