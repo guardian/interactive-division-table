@@ -9,6 +9,7 @@ import http from 'http'
 import fs from 'fs'
 //import cleannumber from 'sean-utils'
 import {cleannumber, twodecimals} from './js/lib/utils'
+import fullhouse from './assets/fullhouse.json'
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -19,20 +20,36 @@ var partialTemplates = {
     "chart" : chartTemplate
 }
 
+function getconstituency(m) {
+    var match = fullhouse.find(function (h) {
+        return h.id == m.id;
+    })
+    if (match != undefined) {
+        m.constituency = match.constituency;
+    }
+    return m;
+}
 
+function getid(m) {
+    m.id = m.member[0]._about.replace("http://data.parliament.uk/members/","");
+    return m;
+}
 
 
 async function getMembers (divisionurl) {
-
-    await axios(divisionurl, { responseType: 'text'}).then(function (response) {
-        var data = xmlparse.parse(response.data);
+    await axios(divisionurl).then(function (response) {
+        var data = response.data.result;
         fs.writeFileSync("./src/assets/data.json",JSON.stringify(data));
         summary = {
-            "for" : cleannumber(data.Division.AyeCount) + 2,
-            "against" : cleannumber(data.Division.NoeCount) + 2
+            "for" : cleannumber(data.primaryTopic.AyesCount[0]._value) + 2,
+            "against" : cleannumber(data.primaryTopic.Noesvotecount[0]._value) + 2
         }  
-        var ayes = data.Division.AyeMembers.Member;
-        var noes = data.Division.NoeMembers.Member;
+        var ayes = data.primaryTopic.vote.filter(function(m){
+            return m.type == "http://data.parliament.uk/schema/parl#AyeVote"
+        });
+        var noes = data.primaryTopic.vote.filter(function(m){
+            return m.type == "http://data.parliament.uk/schema/parl#NoVote"
+        });
         ayes.map(function (m) {
             m.vote = "For";
         })
@@ -41,10 +58,11 @@ async function getMembers (divisionurl) {
         });
         members = ayes.concat(noes);
         members.map(function (m) {
-            m.tidyname = m.Name.split(",");
-            m.tidyname = m.tidyname[1] + "!" + m.tidyname[0];
+            getid(m);
+            getconstituency(m);
+            m.tidyname = m.memberPrinted._value;
             m.tidyname = m.tidyname.replace("Dr ", "").replace("Mr ", "").replace("Mrs ", "").replace("Ms ", "").replace("Sir ", "").replace(". ", " ").replace("!", " ");
-            switch(m.Party){
+            switch(m.memberParty){
                 case "Labour (Co-op)":
                 m.shortparty = 'Lab';
                 break;
@@ -115,7 +133,7 @@ async function getMembers (divisionurl) {
         summary.noespercent = getPercents(summary.noesbreakdown);
     
 
-
+        console.log(members);
         fs.writeFileSync("./src/assets/summary.json",JSON.stringify(summary));        
         fs.writeFileSync("./src/assets/votes.json",JSON.stringify(members));
         return (members,summary);
