@@ -20,7 +20,6 @@ var lastcriterion, lastSorted;
 var reverse = false;
 
 function initsearch() {
-    console.log('dsiodsuiods')
     searchEl.addEventListener("keyup", function () { 
         render() });
     searchEl.addEventListener("focus", function () {
