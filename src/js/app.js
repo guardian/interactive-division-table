@@ -37,10 +37,16 @@ function initsearch() {
 function sortColumns(e) {
     var criterion;
     if (e.target.textContent == 'MP') {
-        criterion = "Name"
+        criterion = "sortname"
     } else if (e.target.textContent == "Vote") {
         criterion = "vote"
-    } else { criterion = e.target.textContent };
+    } else if (e.target.textContent == "Constituency") {
+        criterion = "constituency"
+    }
+    else if (e.target.textContent == "Party") {
+        criterion = "shortparty"
+    }
+     else { criterion = e.target.textContent };
     //sorting new column
     if (lastcriterion !== criterion) {
        reverse = true;
@@ -61,7 +67,9 @@ function sortColumns(e) {
 }
 
 function ordermembers(criterion) {
+    console.log(criterion)
     return function (a, b) {
+        console.log(a[criterion])
         if (a[criterion] < b[criterion]) { return -1 };
         if (b[criterion] < a[criterion]) { return 1 };
         if (b[criterion] == a[criterion]) { return 0 };

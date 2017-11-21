@@ -30,6 +30,17 @@ function getconstituency(m) {
     return m;
 }
 
+function getsortname(m) {
+    var match = fullhouse.find(function (h) {
+        return h.id == m.id;
+    })
+    if (match != undefined) {
+        m.sortname = match.name2;
+    }
+    return m;
+}
+
+
 function getid(m) {
     m.id = m.member[0]._about.replace("http://data.parliament.uk/members/","");
     return m;
@@ -60,6 +71,7 @@ async function getMembers (divisionurl) {
         members.map(function (m) {
             getid(m);
             getconstituency(m);
+            getsortname(m);
             m.tidyname = m.memberPrinted._value;
             m.tidyname = m.tidyname.replace("Dr ", "").replace("Mr ", "").replace("Mrs ", "").replace("Ms ", "").replace("Sir ", "").replace(". ", " ").replace("!", " ");
             switch(m.memberParty){
@@ -132,8 +144,6 @@ async function getMembers (divisionurl) {
         summary.ayespercent = getPercents(summary.ayesbreakdown);
         summary.noespercent = getPercents(summary.noesbreakdown);
     
-
-        console.log(members);
         fs.writeFileSync("./src/assets/summary.json",JSON.stringify(summary));        
         fs.writeFileSync("./src/assets/votes.json",JSON.stringify(members));
         return (members,summary);
@@ -152,6 +162,7 @@ function getPercents(breakdown) {
 
 export async function render(config) {
     const divisionurl = config.divisionurl;
+    console.log(divisionurl);
     await getMembers(divisionurl);
     var templatedata = {members,summary}
     var html = mustache.render(mainTemplate,templatedata,partialTemplates);
