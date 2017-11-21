@@ -67,9 +67,7 @@ function sortColumns(e) {
 }
 
 function ordermembers(criterion) {
-    console.log(criterion)
     return function (a, b) {
-        console.log(a[criterion])
         if (a[criterion] < b[criterion]) { return -1 };
         if (b[criterion] < a[criterion]) { return 1 };
         if (b[criterion] == a[criterion]) { return 0 };
